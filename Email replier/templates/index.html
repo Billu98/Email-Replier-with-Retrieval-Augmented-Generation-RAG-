@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Processor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        #upload-container {
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        #upload-container h1 {
+            margin-bottom: 20px;
+        }
+        #upload-container input[type="file"] {
+            display: none;
+        }
+        #upload-container label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #upload-container label:hover {
+            background-color: #0056b3;
+        }
+        #answers {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: left;
+            max-width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="upload-container">
+        <h1>Process Files with AI</h1>
+        <input type="file" id="file-input" accept=".msg,.pdf,.txt,.docx">
+        <label for="file-input">Choose file</label>
+        <div id="answers"></div>
+    </div>
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', async function() {
+            const file = this.files[0];
+            if (!file) return;
+
+            console.log('File selected:', file);
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/process_file', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                console.log('Response from server:', data);
+
+                const answersDiv = document.getElementById('answers');
+                answersDiv.innerHTML = '';
+                if (data.error) {
+                    answersDiv.textContent = data.error;
+                } else {
+                    data.answers.forEach(qa => {
+                        const question = document.createElement('div');
+                        question.textContent = `Q: ${qa.question}`;
+                        question.style.fontWeight = 'bold';
+                        const answer = document.createElement('div');
+                        answer.textContent = `A: ${qa.answer}`;
+                        answer.style.marginBottom = '10px';
+                        answersDiv.appendChild(question);
+                        answersDiv.appendChild(answer);
+                    });
+                }
+            } catch (error) {
+                console.error('Error during fetch:', error);
+                document.getElementById('answers').textContent = 'An error occurred while processing the file.';
+            }
+        });
+    </script>
+</body>
+</html>
