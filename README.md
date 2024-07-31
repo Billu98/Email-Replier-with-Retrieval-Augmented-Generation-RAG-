@@ -2,28 +2,44 @@
 This project is a web application that leverages the power of Retrieval-Augmented Generation (RAG) to create an intelligent email replier. Users can upload .msg, .pdf, .txt, and .docx files. The application extracts text from these files, identifies questions within the text, and generates accurate and context-aware answers using OpenAI's GPT-35-turbo model.
 
 ## Features
+ 
   ->  **Multi-format File Upload:** Supports file uploads in .msg, .pdf, .txt, and .docx formats.
+  
   ->  **Text Extraction:** Efficiently extracts text from the uploaded documents.
+  
   ->  **Question Identification:** Identifies questions within the extracted text.
+  
   ->  **Answer Generation:** Utilizes OpenAI's GPT-35-turbo model to generate contextually accurate answers.
+  
   ->  **User-friendly Interface:** Displays questions and answers in a clean and easy-to-use interface.
+  
   ->  **Context Preservation:** Maintains the context of the conversation to provide coherent and relevant responses.
 
 ## Technologies Used
+
 ->   **Python:** The core programming language used for the backend logic.
+
 ->    **Flask:** A lightweight WSGI web application framework for the backend.
+
 ->    **OpenAI GPT-35-turbo:** For generating intelligent responses.
+
 ->    **FAISS:** For efficient similarity search and clustering of dense vectors.
+
 ->   **LangChain:** For creating the chain of retrieval and generation tasks.
+
 ->    **dotenv:** For managing environment variables.
+
 ->    **Conda:** For managing the project's environment and dependencies.
 
 ## Retrieval-Augmented Generation (RAG)
 This project utilizes the concept of Retrieval-Augmented Generation (RAG) to enhance the accuracy and relevance of the generated answers. RAG combines the power of retrieval (finding relevant documents) and generation (creating responses) to provide more informed and context-aware answers. The workflow is as follows:
 
 -> **Document Loading:** The uploaded document is parsed and split into manageable chunks.
+
 -> **Embedding Generation:** Each chunk is converted into dense vectors using Azure OpenAI Embeddings.
+
 ->  **Retrieval:** Relevant chunks are retrieved based on their similarity to the input query.
+
 ->  **Answer Generation:** The retrieved chunks are fed into the GPT-35-turbo model to generate accurate and contextually relevant answers.
 
 ## Installation
