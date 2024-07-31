@@ -87,6 +87,7 @@ email_replier/
 │   └── index.html
 
 ├── uploads/
+
 └── .env
 
 ## Contributing
