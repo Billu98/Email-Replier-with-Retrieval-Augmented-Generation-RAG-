@@ -61,10 +61,15 @@ http://127.0.0.1:5000/
 
 Click on the "Choose file" button and select a .msg, .pdf, .txt, or .docx file from your computer. The application will process the file, extract text, identify questions, and generate answers which will be displayed on the interface.
 email_replier/
+
 ├── app.py
+
 ├── requirements.txt
+
 ├── templates/
+
 │   └── index.html
+
 ├── uploads/
 └── .env
 
